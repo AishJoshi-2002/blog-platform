@@ -1,23 +1,28 @@
 const userModel = require('../models/user.model');
 const blacklistTokenModel = require('../models/blacklistToken.model');
-const { createUser }= require('../services/user.service');
+const { createUser } = require('../services/user.service');
 const { validationResult } = require('express-validator');
 
 const registerUser = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const { name, email, role, password } = req.body;
+        const hashedPassword = await userModel.hashPassword(password);
+        const user = await createUser(
+            name,
+            email,
+            role,
+            hashedPassword
+        )
+        const token = user.generateAuthToken();
+        res.cookie('token', token);
+        res.status(201).json({ token, user });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-    const { name, email, password } = req.body;
-    const hashedPassword = userModel.hashPassword(password);
-    const user = await createUser({
-        name,
-        email,
-        password: hashedPassword
-    })
-    const token = user.generateAuthToken();
-    res.cookie('token', token);
-    res.status(201).json({ token, user});
 };
 
 const loginUser = async (req, res, next) => {
@@ -31,7 +36,7 @@ const loginUser = async (req, res, next) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
     const isMatch = user.comparePassword(password);
-    if(!isMatch) {
+    if (!isMatch) {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
     const token = user.generateAuthToken();
