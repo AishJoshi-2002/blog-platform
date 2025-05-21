@@ -1,0 +1,7 @@
+ /* Reuse footer style from HomePage.css */
+ .footer {
+    background-color: #17375e;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }

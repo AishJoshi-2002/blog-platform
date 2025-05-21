@@ -1,0 +1,74 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6f8;
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 0 1rem;
+  }
+  
+  .hero-card {
+    background-color: #17375e;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .hero-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-card h1 {
+    margin: 0.5rem 0;
+  }
+  
+  .hero-card p {
+    font-size: 1rem;
+    color: #cbd5e0;
+    margin-bottom: 1.5rem;
+  }
+  
+  .browse-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: white;
+    color: #17375e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  /* Latest Posts */
+  .latest-posts {
+    margin-top: 4rem;
+    text-align: center;
+  }
+  
+  .latest-posts h2 {
+    color: #17375e;
+    margin-bottom: 1rem;
+  }
+  
+  .no-posts {
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  
